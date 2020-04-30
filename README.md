@@ -22,6 +22,9 @@
 ## Slides
 https://docs.google.com/presentation/d/1o1HvaQaR5tvvbEHRLu0RFl3dKFdMhICsYM7Aa9ejfRo/edit#slide=id.p
 
+## Video
+https://github.com/TianjiaoLuo/CS184-Milestone/raw/master/118.mov
+
 ## Original Proposal
 https://lxjhk.github.io/cs184-group-project/
 
