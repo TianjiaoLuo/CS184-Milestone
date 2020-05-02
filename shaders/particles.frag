@@ -52,8 +52,8 @@ void main() {
 
     float dens = particleDensity/15000;
 
-    vec3 tempColor = diffuse * vec3(0.9, 0.94, 1.0);
+    vec3 tempColor = diffuse * vec3(0.0, 0.5, 1.0);
 
     //color = vec4(pointLight.color * pointLight.intensity * diffuse + ambLight.color * ambLight.intensity, 1);
-    color = vec4(dens * tempColor + 0.1f, 1.0f);
+    color = vec4(dens * tempColor + 0.1f, 0.5);
 }
