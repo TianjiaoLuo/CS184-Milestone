@@ -16,9 +16,6 @@
 ### May 5 - 6th:
 * Add more complex geometry to the scene (maybe a bunny).
 
-## Video
-
-
 ## Slides
 https://docs.google.com/presentation/d/1o1HvaQaR5tvvbEHRLu0RFl3dKFdMhICsYM7Aa9ejfRo/edit#slide=id.p
 
