@@ -28,12 +28,25 @@ uniform float pointRadius;  // point size in world space
 uniform PointLight pointLight;
 uniform AmbientLight ambLight;
 
-//ADDED
-vec3 v_reflection;
+/****************  ADDED new args ***************/
+//reflection
+vec3 reflection;
 vec3 incident;
 vec4 reflectionColor;
 uniform samplerCube u_cubemap;
-//END
+
+//Indices of refraction
+vec3 refraction;
+float fresnel;
+vec4 refractionColor;
+const float Air = 1.0;
+const float Glass = 1.51714;
+const float Eta = Air / Glass;
+// see http://en.wikipedia.org/wiki/Refractive_index Reflectivity
+const float R0 = ((Air - Glass) * (Air - Glass)) / ((Air + Glass) * (Air + Glass));
+
+vec4 fragColor;
+/****************  END  ***************/
 
 
 void main() {
@@ -64,13 +77,24 @@ void main() {
 
     vec3 tempColor = diffuse * vec3(0.0, 0.5, 1.0);
     
-    //ADDED
+    /****************  ADDED  ***************/
     incident = normalize(spherePosEye - posEye);
-    v_reflection = reflect(incident, n);
-    reflectionColor = texture(u_cubemap, normalize(v_reflection));
-    tempColor += vec3(reflectionColor);
-    //END
+    //reflection
+    reflection = reflect(incident, n);
+    reflectionColor = texture(u_cubemap, normalize(reflection));
+//    tempColor += vec3(reflectionColor);
+    
+    //refraction
+    refraction = refract(incident, n, Eta);
+    // see http://en.wikipedia.org/wiki/Schlick%27s_approximation
+    fresnel = R0 + (1.0 - R0) * pow((1.0 - dot(-incident, n)), 5.0);
+    refractionColor = texture(u_cubemap, normalize(refraction));
+//    tempColor = tempColor + vec3(refractionColor) + fresnel;
+    
+    fragColor = mix(refractionColor, reflectionColor, fresnel);
+    tempColor += vec3(fragColor);
+    /****************  END ***************/
 
     
-    color = vec4(dens * tempColor + 0.1f, 0.5);
+    color = vec4(dens * tempColor + 0.1f, 0.1);
 }
