@@ -82,15 +82,12 @@ void main() {
     //reflection
     reflection = reflect(incident, n);
     reflectionColor = texture(u_cubemap, normalize(reflection));
-//    tempColor += vec3(reflectionColor);
     
     //refraction
     refraction = refract(incident, n, Eta);
     // see http://en.wikipedia.org/wiki/Schlick%27s_approximation
     fresnel = R0 + (1.0 - R0) * pow((1.0 - dot(-incident, n)), 5.0);
     refractionColor = texture(u_cubemap, normalize(refraction));
-//    tempColor = tempColor + vec3(refractionColor) + fresnel;
-    
     fragColor = mix(refractionColor, reflectionColor, fresnel);
     tempColor += vec3(fragColor);
     /****************  END ***************/
