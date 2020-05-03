@@ -52,7 +52,8 @@ vec3 calcPointColor() {
 }
 
 void main() {
-    vec3 total = calcAmbColor() + calcDirColor() + calcPointColor();
+    //Removed ambient color
+    vec3 total = calcDirColor() + calcPointColor();
 
     color = vec4(total, 1);
 }

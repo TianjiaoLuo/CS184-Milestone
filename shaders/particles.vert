@@ -19,6 +19,7 @@ uniform mat4 MV;
 uniform float pointRadius;  // point size in world space
 uniform float pointScale;   // scale to calculate size in pixels
 
+
 void main() {
     particleDensity = density;
     velocity_ = vec3(velocity);
@@ -28,10 +29,11 @@ void main() {
     posEye = vec3(MV * position);
     float dist = length(posEye);
     gl_PointSize = 1000 * pointRadius * (pointScale / dist);
-    gl_PointSize = 10;
+//    gl_PointSize = 10;
 
     vec3 tmp = position.xyz;
     tmp.y = -tmp.y;
+    
 
     gl_Position = MVP * vec4(tmp, 1);
 }

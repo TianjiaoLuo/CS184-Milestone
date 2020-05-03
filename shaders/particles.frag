@@ -28,6 +28,14 @@ uniform float pointRadius;  // point size in world space
 uniform PointLight pointLight;
 uniform AmbientLight ambLight;
 
+//ADDED
+vec3 v_reflection;
+vec3 incident;
+vec4 reflectionColor;
+uniform samplerCube u_cubemap;
+//END
+
+
 void main() {
     const float shininess = 40.0;
 
@@ -43,6 +51,8 @@ void main() {
 
     // calculate lighting
     vec3 lightDir = normalize(vec3(0.0f, 2.0f, 2.0f) - posWorld);
+    
+    
     // directionalLighting
 
     float diffuse = max(0.0, dot(lightDir, n));
@@ -53,7 +63,14 @@ void main() {
     float dens = particleDensity/15000;
 
     vec3 tempColor = diffuse * vec3(0.0, 0.5, 1.0);
+    
+    //ADDED
+    incident = normalize(spherePosEye - posEye);
+    v_reflection = reflect(incident, n);
+    reflectionColor = texture(u_cubemap, normalize(v_reflection));
+    tempColor += vec3(reflectionColor);
+    //END
 
-    //color = vec4(pointLight.color * pointLight.intensity * diffuse + ambLight.color * ambLight.intensity, 1);
+    
     color = vec4(dens * tempColor + 0.1f, 0.5);
 }
