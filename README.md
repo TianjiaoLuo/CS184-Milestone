@@ -1,11 +1,12 @@
-# CS184 Final Project Milstone Report
+# CS184 Final Project Report
 # 3D Position-Based Fluid Simulation and Surfacing
 
-## Current Progress
+## What we had achieved
 * we had successfully compiled and ran the simulation.
 * Problems observed: currently we are using 2600 particles falling from the sky (each of which has a distance of .05), when we increase the number of particles to 8000, the simulation seems unrealistic in that the particle will draft in the sky for a long time.
+* Tunning the parameters to simulate water flow better.
 
-## Future Plan
+## Plan
 ### April 28 - May 2nd:
 * Fixing the bugs
 * Manipulate the parameters to compare different effects caused by the parameters
